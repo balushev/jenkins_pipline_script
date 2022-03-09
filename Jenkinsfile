@@ -55,7 +55,7 @@ pipeline {
 	 stages {
         stage('Checkout SCM') {
             steps {
-                echo 'checkout'
+                echo ' => Execute Checkout SCM'
 		script{
                     checkout([$class: 'GitSCM',
                               branches: [[name: params.BRANCH]],
@@ -64,29 +64,31 @@ pipeline {
                 }
             }
         }
-        stage('Run Python Requirements'){
+        stage('Python Requirements'){
             steps {
+		echo ' => Execute Run Python Requirements'
                 echo 'bat pip install -r requirements.txt'
             }
         }
-        stage('Run Tests') {
+        stage('Tests') {
             steps {
-                echo 'Execute Tests'
-                echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
-                echo "Jenkins Workspace ${env.WORKSPACE}"
-                echo "JOB NAME ${env.JOB_NAME}"
+                echo ' => Execute Tests'
+                echo "info: Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+                echo "info: Jenkins Workspace ${env.WORKSPACE}"
+                echo "info: JOB NAME ${env.JOB_NAME}"
                 script {
                     
-					if (params.OVERWRITE_COMMAND == '') {
-						if (params.ENABLE_ALLURE_REPORTS == true) {
-						    echo 'bat "behave --tags ${params.TAG} -f allure_behave.formatter:AllureFormatter -o allure-reports ./features -D browser=${params.BROWSER} -D env=${params.ENVIRONMENT} -D tenant=${params.TENANT}"'
-						} else {
-							echo 'bat "behave --tags ${params.TAG} ./features -D browser=${params.BROWSER} -D env=${params.ENVIRONMENT} -D tenant=${params.TENANT}"'
-						}
-					} 
-					else {
-						echo 'bat "${params.OVERWRITE_COMMAND}"'
-					}
+			if (params.OVERWRITE_COMMAND == '') {
+				if (params.ENABLE_ALLURE_REPORTS == true) {
+				    echo 'bat "behave --tags ${params.TAG} -f allure_behave.formatter:AllureFormatter -o allure-reports ./features -D browser=${params.BROWSER} -D env=${params.ENVIRONMENT} -D tenant=${params.TENANT}"'
+				} 
+				else {
+					echo 'bat "behave --tags ${params.TAG} ./features -D browser=${params.BROWSER} -D env=${params.ENVIRONMENT} -D tenant=${params.TENANT}"'
+				}
+			} 
+			else {
+				echo 'bat "${params.OVERWRITE_COMMAND}"'
+			}
                 }
             }
         }
@@ -94,7 +96,7 @@ pipeline {
     post('Publish report') {
         always {
             
-			echo 'Generate Allure report'
+		echo 'Set Allure properties'
 			
 // 			script {
 //                 allure([
@@ -112,7 +114,7 @@ pipeline {
         }
         
 		cleanup {
-			echo 'cleanWs'
+			echo 'CleanWs'
         }
     }
 }
