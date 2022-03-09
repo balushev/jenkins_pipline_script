@@ -57,6 +57,12 @@ pipeline {
         stage('Checkout SCM') {
             steps {
                 echo 'checkout'
+		script{
+                    checkout([$class: 'GitSCM',
+                              branches: [[name: '*/main']],
+                              extensions: [],
+                              userRemoteConfigs: [[url: 'https://github.com/balushev/python_test.git']]])
+                }
             }
         }
         stage('Run Python Requirements'){
