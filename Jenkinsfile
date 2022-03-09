@@ -7,7 +7,8 @@ pipeline {
 			choices: [
 			 'master', 
 			 'develop', 
-			 'Borko'
+			 'Borko',
+			 'Ala Bala'
 			], 
 			description: 'Please select the Branch'
 		)
