@@ -1,10 +1,10 @@
 pipeline {
-    agent any
-
+    agent any        // 	set agent
 	parameters {
 		choice(
 			name: 'BRANCH', 
 			choices: [
+			 'main',
 			 'master', 
 			 'develop', 
 			 'Borko'
@@ -58,7 +58,7 @@ pipeline {
                 echo 'checkout'
 		script{
                     checkout([$class: 'GitSCM',
-                              branches: [[name: '*/main']],
+                              branches: [[name: params.BRANCH]],
                               extensions: [],
                               userRemoteConfigs: [[url: 'https://github.com/balushev/python_test.git']]])
                 }
