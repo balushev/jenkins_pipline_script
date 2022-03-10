@@ -118,8 +118,6 @@ pipeline {
 		    script {
 			if (params.ENABLE_SEND_EMAILS == true) {
 			    emailext body: 'It is alive',
-				    attachLog: true, 
-				    attachmentsPattern: '*.log',
 				    subject: "[Jenkins][${ENVIRONMENT}] Automation Tests Execution Summary",
 				    to: "borislav.balushev@dxc.com"
 			}
