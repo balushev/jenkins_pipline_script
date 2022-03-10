@@ -101,18 +101,15 @@ pipeline {
 	    }
 	    post('Publish report') {
 		always {
-
-			echo 'Set Allure properties'
-
-	// 			script {
-	//                 allure([
-	//                         includeProperties: false,
-	//                         jdk: '',
-	//                         properties: [],
-	//                         reportBuildPolicy: 'ALWAYS',
-	//                         results: [[path: 'allure-reports']]
-	//                 ])
-		    // }
+			script {
+				allure([
+					includeProperties: false,
+					jdk: '',
+					properties: [],
+					reportBuildPolicy: 'ALWAYS',
+					results: [[path: 'allure-reports']]
+				])
+		    	}
 		}
 
 		failure {
