@@ -2,7 +2,7 @@ pipeline {
     
 	agent 
 		node {
-		    label 'AUTOMATION && SELENIUM && ARGENTA'
+		    label 'AUTOMATION'
 		}
 	
 	parameters {
