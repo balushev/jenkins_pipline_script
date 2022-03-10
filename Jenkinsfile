@@ -117,7 +117,7 @@ pipeline {
 		failure {
 		    script {
 			if (params.ENABLE_SEND_EMAILS == true) {
-			    email body: 'It is alive',
+			    emailext body: 'It is alive',
 				  subject: "Automation Tests Execution Summary",
 				  to: "b_dimov@abv.bg"
 			}
