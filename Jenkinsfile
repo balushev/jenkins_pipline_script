@@ -117,9 +117,9 @@ pipeline {
 		failure {
 		    script {
 			if (params.ENABLE_SEND_EMAILS == true) {
-			    emailext body: 'It is alive',
-				    subject: "[Jenkins][${ENVIRONMENT}] Automation Tests Execution Summary",
-				    to: "b_dimov@abv.bg"
+			    email body: 'It is alive',
+				  subject: "Automation Tests Execution Summary",
+				  to: "b_dimov@abv.bg"
 			}
 		    }
 		}
