@@ -113,8 +113,12 @@ pipeline {
             echo 'Failure'
         }
         
-		cleanup {
-			echo 'CleanWs'
+	cleanup {
+		cleanWs(cleanWhenNotBuilt: false,
+			deleteDirs: true,
+                    	disableDeferredWipeout: true,
+                    	notFailBuild: true,
+                    	patterns: [[pattern: '**/*', type: 'INCLUDE'], [pattern: '.propsfile', type: 'EXCLUDE']])
         }
     }
 }
