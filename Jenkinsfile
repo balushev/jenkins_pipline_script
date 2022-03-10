@@ -1,5 +1,10 @@
 pipeline {
-    agent any        // 	set agent
+    
+	agent 
+		node {
+		    label 'AUTOMATION && SELENIUM && ARGENTA'
+		}
+	
 	parameters {
 		choice(
 			name: 'BRANCH', 
