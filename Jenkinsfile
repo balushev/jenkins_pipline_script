@@ -101,6 +101,7 @@ pipeline {
 	    }
 	    post('Publish report') {
 		always {
+			echo 'always'
 // 			script {
 // 				allure([
 // 					includeProperties: false,
