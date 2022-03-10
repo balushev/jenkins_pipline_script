@@ -32,7 +32,7 @@ pipeline {
 		)
 		string(
 			name: 'ENVIRONMENT', 
-			defaultValue: 'ArgentaRunTLC', 
+			defaultValue: 'ArgentaRunLCT', 
 			description: 'Please fill your environment'
 		)
 		string(
