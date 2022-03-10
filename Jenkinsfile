@@ -1,9 +1,10 @@
 pipeline {
     
-	agent 
+	agent{ 
 		node {
 		    label 'AUTOMATION'
 		}
+	}
 	
 	parameters {
 		choice(
