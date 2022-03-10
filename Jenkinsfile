@@ -101,19 +101,27 @@ pipeline {
 	    }
 	    post('Publish report') {
 		always {
-			script {
-				allure([
-					includeProperties: false,
-					jdk: '',
-					properties: [],
-					reportBuildPolicy: 'ALWAYS',
-					results: [[path: 'allure-reports']]
-				])
-		    	}
+// 			script {
+// 				allure([
+// 					includeProperties: false,
+// 					jdk: '',
+// 					properties: [],
+// 					reportBuildPolicy: 'ALWAYS',
+// 					results: [[path: 'allure-reports']]
+// 				])
+// 		    	}
 		}
 
 		failure {
-		    echo 'Failure'
+		    script {
+			if (params.ENABLE_SEND_EMAILS == true) {
+			    emailext body: 'It is alive',
+				    attachLog: true, 
+				    attachmentsPattern: '*.log',
+				    subject: "[Jenkins][${ENVIRONMENT}] Automation Tests Execution Summary",
+				    to: "borislav.balushev@dxc.com"
+			}
+		    }
 		}
 
 		cleanup {
