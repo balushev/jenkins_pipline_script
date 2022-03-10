@@ -120,7 +120,7 @@ pipeline {
 		}
 
 		cleanup {
-			echo clean_WS
+			echo 'clean_WS'
 // 			cleanWs(cleanWhenNotBuilt: false,
 // 				deleteDirs: true,
 // 				disableDeferredWipeout: true,
