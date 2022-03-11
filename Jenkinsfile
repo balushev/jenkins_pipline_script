@@ -121,7 +121,7 @@ pipeline {
 			    emailext(
 				to: "borislav.balushev@dxc.com",
 				subject: "[ Jenkins ][ ${ENVIRONMENT} ] => Automation Tests Execution Summary",
-				body: 'It is alive',  
+				body: 'Some message !!!',  
 				attachLog: true, 
 				attachmentsPattern: '*.log'
 				)
