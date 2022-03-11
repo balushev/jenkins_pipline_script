@@ -42,11 +42,6 @@ pipeline {
 			description: 'Please fill your tenant'
 		)
 		booleanParam(
-			name: 'ENABLE_ALLURE_REPORTS', 
-			defaultValue: false, 
-			description: 'Please make your choose'
-		)
-		booleanParam(
 			name: 'ENABLE_SEND_EMAILS', 
 			defaultValue: false, 
 			description: 'Please make your choose'
@@ -103,15 +98,13 @@ pipeline {
 	    post('Publish report') {
 		always {
  			script {
-				if (params.ENABLE_ALLURE_REPORTS == true) {
-					allure([
-						includeProperties: false,
-						jdk: '',
-						properties: [],
-						reportBuildPolicy: 'ALWAYS',
-						results: [[path: 'allure-reports']]
-					])
-				}
+				allure([
+					includeProperties: false,
+					jdk: '',
+					properties: [],
+					reportBuildPolicy: 'ALWAYS',
+					results: [[path: 'allure-reports']]
+				])
  		    	}
 		}
 
