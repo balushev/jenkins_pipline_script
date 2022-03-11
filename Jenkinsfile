@@ -102,16 +102,17 @@ pipeline {
 	    }
 	    post('Publish report') {
 		always {
-			echo 'always'
-// 			script {
-// 				allure([
-// 					includeProperties: false,
-// 					jdk: '',
-// 					properties: [],
-// 					reportBuildPolicy: 'ALWAYS',
-// 					results: [[path: 'allure-reports']]
-// 				])
-// 		    	}
+ 			script {
+				if (params.ENABLE_ALLURE_REPORTS == true) {
+					allure([
+						includeProperties: false,
+						jdk: '',
+						properties: [],
+						reportBuildPolicy: 'ALWAYS',
+						results: [[path: 'allure-reports']]
+					])
+				}
+ 		    	}
 		}
 
 		failure {
@@ -128,12 +129,11 @@ pipeline {
 		}
 
 		cleanup {
-			echo 'clean_WS'
-// 			cleanWs(cleanWhenNotBuilt: false,
-// 				deleteDirs: true,
-// 				disableDeferredWipeout: true,
-// 				notFailBuild: true,
-// 				patterns: [[pattern: '**/*', type: 'INCLUDE'], [pattern: '.propsfile', type: 'EXCLUDE']])
+			cleanWs(cleanWhenNotBuilt: false,
+				deleteDirs: true,
+				disableDeferredWipeout: true,
+				notFailBuild: true,
+				patterns: [[pattern: '**/*', type: 'INCLUDE'], [pattern: '.propsfile', type: 'EXCLUDE']])
 		}
     	}
 }
