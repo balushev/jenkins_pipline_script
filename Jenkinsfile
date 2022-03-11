@@ -119,7 +119,7 @@ pipeline {
 			if (params.ENABLE_SEND_EMAILS == true) {
 			    emailext body: 'It is alive',
 				  subject: "Automation Tests Execution Summary",
-				  to: "b_dimov@abv.bg"
+				  to: "borislav.balushev@dxc.com"
 			}
 		    }
 		}
