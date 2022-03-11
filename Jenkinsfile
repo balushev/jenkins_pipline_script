@@ -61,7 +61,7 @@ pipeline {
 	stages {
 		stage('Checkout SCM') {
 		    steps {
-			echo ' => Execute Checkout SCM'
+			echo ' ======> Execute Checkout SCM <======'
 			script{
 			    checkout([$class: 'GitSCM',
 				      branches: [[name: params.BRANCH]],
@@ -72,13 +72,13 @@ pipeline {
 		}
 		stage('Python Requirements'){
 		    steps {
-			echo ' => Execute Run Python Requirements'
+			echo ' ======> Execute Run Python Requirements <======'
 			echo 'bat pip install -r requirements.txt'
 		    }
 		}
 		stage('Tests') {
 		    steps {
-			echo ' => Execute Tests'
+			echo ' ======> Execute Tests <======'
 			echo "info: Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
 			echo "info: Jenkins Workspace ${env.WORKSPACE}"
 			echo "info: JOB NAME ${env.JOB_NAME}"
