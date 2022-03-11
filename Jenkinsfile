@@ -118,21 +118,25 @@ pipeline {
 		failure {
 		    script {
 			if (params.ENABLE_SEND_EMAILS == true) {
-			    emailext to: "borislav.balushev@dxc.com",
+			    emailext(
+				to: "borislav.balushev@dxc.com",
 				subject: "[ Jenkins ][ ${ENVIRONMENT} ] => Automation Tests Execution Summary",
 				body: 'It is alive',  
 				attachLog: true, 
 				attachmentsPattern: '*.log'
+				)
 			}
 		    }
 		}
 
 		cleanup {
-			cleanWs(cleanWhenNotBuilt: false,
+			cleanWs(
+				cleanWhenNotBuilt: false,
 				deleteDirs: true,
 				disableDeferredWipeout: true,
 				notFailBuild: true,
-				patterns: [[pattern: '**/*', type: 'INCLUDE'], [pattern: '.propsfile', type: 'EXCLUDE']])
+				patterns: [[pattern: '**/*', type: 'INCLUDE'], [pattern: '.propsfile', type: 'EXCLUDE']]
+			       )
 		}
     	}
 }
