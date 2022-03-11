@@ -118,7 +118,7 @@ pipeline {
 		    script {
 			if (params.ENABLE_SEND_EMAILS == true) {
 			    emailext body: 'It is alive',
-				  subject: "Automation Tests Execution Summary",
+				  subject: "[Jenkins][${ENVIRONMENT}] Automation Tests Execution Summary",
 				  to: "borislav.balushev@dxc.com"
 			}
 		    }
