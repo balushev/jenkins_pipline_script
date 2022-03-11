@@ -117,9 +117,12 @@ pipeline {
 		failure {
 		    script {
 			if (params.ENABLE_SEND_EMAILS == true) {
-			    emailext body: 'It is alive',
-				  subject: "[ Jenkins ][ ${ENVIRONMENT} ] => Automation Tests Execution Summary",
-				  to: "borislav.balushev@dxc.com"
+			    emailext
+				to: "borislav.balushev@dxc.com",
+				subject: "[ Jenkins ][ ${ENVIRONMENT} ] => Automation Tests Execution Summary",
+				body: 'It is alive',  
+				attachLog: true, 
+				attachmentsPattern: '*.log'
 			}
 		    }
 		}
