@@ -113,28 +113,28 @@ pipeline {
 //  		    	}
 // 		}
 
-		failure {
-		    script {
-			if (params.ENABLE_SEND_EMAILS == true) {
-			    emailext(
-				to: "borislav.balushev@dxc.com",
-				subject: "[ Jenkins ][ ${ENVIRONMENT} ] => Automation Tests Execution Summary",
-				body: 'Some message !!!',  
-				attachLog: true, 
-				attachmentsPattern: '*.log'
-				)
+			failure {
+				script {
+					if (params.ENABLE_SEND_EMAILS == true) {
+						emailext(
+						to: "borislav.balushev@dxc.com",
+						subject: "[ Jenkins ][ ${ENVIRONMENT} ] => Automation Tests Execution Summary",
+						body: 'Some message !!!',  
+						attachLog: true, 
+						attachmentsPattern: '*.log'
+						)
+					}
+				}
 			}
-		    }
-		}
 
-		cleanup {
-			cleanWs(
-				cleanWhenNotBuilt: false,
-				deleteDirs: true,
-				disableDeferredWipeout: true,
-				notFailBuild: true,
-				patterns: [[pattern: '**/*', type: 'INCLUDE'], [pattern: '.propsfile', type: 'EXCLUDE']]
-			       )
+			// cleanup {
+			// 	cleanWs(
+			// 		cleanWhenNotBuilt: false,
+			// 		deleteDirs: true,
+			// 		disableDeferredWipeout: true,
+			// 		notFailBuild: true,
+			// 		patterns: [[pattern: '**/*', type: 'INCLUDE'], [pattern: '.propsfile', type: 'EXCLUDE']]
+			// 		)
+			// }
 		}
-    	}
 }
