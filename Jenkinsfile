@@ -86,14 +86,14 @@ pipeline {
 
 				if (params.OVERWRITE_COMMAND == '') {
 					if (params.ENABLE_ALLURE_REPORTS == true) {
-					    echo 'bat "behave --tags ${params.TAG} -f allure_behave.formatter:AllureFormatter -o allure-reports ./features -D browser=${params.BROWSER} -D env=${params.ENVIRONMENT} -D tenant=${params.TENANT}"'
+					    bat "behave --tags ${params.TAG} -f allure_behave.formatter:AllureFormatter -o allure-reports ./features -D browser=${params.BROWSER} -D env=${params.ENVIRONMENT} -D tenant=${params.TENANT}"
 					} 
 					else {
-						echo 'bat "behave --tags ${params.TAG} ./features -D browser=${params.BROWSER} -D env=${params.ENVIRONMENT} -D tenant=${params.TENANT}"'
+						bat "behave --tags ${params.TAG} ./features -D browser=${params.BROWSER} -D env=${params.ENVIRONMENT} -D tenant=${params.TENANT}"
 					}
 				} 
 				else {
-					echo 'bat "${params.OVERWRITE_COMMAND}"'
+					bat "${params.OVERWRITE_COMMAND}"
 				}
 				assert 1 == 2
 			}
