@@ -33,7 +33,7 @@ pipeline {
 		)
 		string(
 			name: 'ENVIRONMENT', 
-			defaultValue: 'ArgentaRunLCT', 
+			defaultValue: 'ArgentaRunLCT_1', 
 			description: 'Please fill your environment'
 		)
 		string(
@@ -43,11 +43,6 @@ pipeline {
 		)
 		booleanParam(
 			name: 'ENABLE_ALLURE_REPORTS', 
-			defaultValue: false, 
-			description: 'Please make your choose'
-		)
-		booleanParam(
-			name: 'ENABLE_SEND_EMAILS', 
 			defaultValue: false, 
 			description: 'Please make your choose'
 		)
