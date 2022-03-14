@@ -103,7 +103,7 @@ pipeline {
 	post('Publish report') {
 		always {
 			script {
-				if ((params.ENABLE_ALLURE_REPORTS == true){
+				if (params.ENABLE_ALLURE_REPORTS == true){
 					allure([
 						includeProperties: false,
 						jdk: '',
