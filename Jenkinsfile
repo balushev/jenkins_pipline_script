@@ -99,10 +99,10 @@ pipeline {
 				}
 		    }
 		}
-	    }
-	    post('Publish report') {
+	}
+	post('Publish report') {
 		always {
- 			script {
+			script {
 				if ((params.ENABLE_ALLURE_REPORTS == true){
 					allure([
 						includeProperties: false,
@@ -113,7 +113,7 @@ pipeline {
 						report: 'C:/Allure Reports Repo'
 					])
 				}
- 		    }
+			}
 		}
 
 		failure {
