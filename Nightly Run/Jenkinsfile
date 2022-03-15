@@ -1,0 +1,63 @@
+pipeline {
+    
+	agent{ 
+		node {
+		    label 'selenium'
+		}
+	}
+	
+	stages {
+		stage('Checkout SCM') {
+		    steps {
+			echo ' ============================================> Execute Checkout SCM <===================================='
+			script{
+			    checkout([$class: 'GitSCM',
+				      branches: [[name: params.BRANCH]],
+				      extensions: [],
+				      userRemoteConfigs: [[url: 'https://github.com/balushev/python_test.git']]])
+			}
+		    }
+		}
+		stage('Python Requirements'){
+		    steps {
+				echo ' =======================================> Execute Run Python Requirements <=============================='
+				bat 'pip install -r requirements.txt'
+		    }
+		}
+		stage('Tests') {
+		    steps {
+				echo ' ===============================================> Execute Tests <========================================'
+				echo "info: Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+				echo "info: Jenkins Workspace ${env.WORKSPACE}"
+				echo "info: JOB NAME ${env.JOB_NAME}"
+				script {
+                    bat "behave --tags @nightly_run -f allure_behave.formatter:AllureFormatter -o allure-reports ./features"
+				}
+		    }
+		}
+	}
+	post('Publish report') {
+		always {
+			script {
+                allure([
+                    includeProperties: false,
+                    jdk: '',
+                    properties: [],
+                    reportBuildPolicy: 'ALWAYS',
+                    results: [[path: 'allure-reports']],
+                    report: 'C:/Allure Reports Repo'
+                ])
+			}
+		}
+
+		cleanup {
+			cleanWs(
+				cleanWhenNotBuilt: false,
+				deleteDirs: true,
+				disableDeferredWipeout: true,
+				notFailBuild: true,
+				patterns: [[pattern: '**/*', type: 'INCLUDE'], [pattern: '.propsfile', type: 'EXCLUDE']]
+				)
+		}
+	}
+}
