@@ -38,7 +38,7 @@ pipeline {
 		)
 		booleanParam(
 			name: 'ENABLE_ALLURE_REPORTS', 
-			defaultValue: false, 
+			defaultValue: true, 
 			description: 'Please make your choose'
 		)
 		string(
