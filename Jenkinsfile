@@ -36,11 +36,6 @@ pipeline {
 			defaultValue: 'ArgentaRunLCT_1', 
 			description: 'Please fill your environment'
 		)
-		string(
-			name: 'TENANT', 
-			defaultValue: 'default', 
-			description: 'Please fill your tenant'
-		)
 		booleanParam(
 			name: 'ENABLE_ALLURE_REPORTS', 
 			defaultValue: false, 
@@ -81,10 +76,10 @@ pipeline {
 
 					if (params.OVERWRITE_COMMAND == '') {
 						if (params.ENABLE_ALLURE_REPORTS == true) {
-							bat "behave --tags ${params.TAG} -f allure_behave.formatter:AllureFormatter -o allure-reports ./features -D browser=${params.BROWSER} -D env=${params.ENVIRONMENT} -D tenant=${params.TENANT}"
+							bat "behave --tags ${params.TAG} -f allure_behave.formatter:AllureFormatter -o allure-reports ./features -D browser=${params.BROWSER} -D env=${params.ENVIRONMENT}"
 						} 
 						else {
-							bat "behave --tags ${params.TAG} ./features -D browser=${params.BROWSER} -D env=${params.ENVIRONMENT} -D tenant=${params.TENANT}"
+							bat "behave --tags ${params.TAG} ./features -D browser=${params.BROWSER} -D env=${params.ENVIRONMENT}"
 						}
 					} 
 					else {
@@ -106,20 +101,6 @@ pipeline {
 						results: [[path: 'allure-reports']],
 						report: 'C:/Allure Reports Repo'
 					])
-				}
-			}
-		}
-
-		failure {
-			script {
-				if (params.ENABLE_SEND_EMAILS == true) {
-					emailext(
-					to: "borislav.balushev@dxc.com",
-					subject: "[ Jenkins ][ ${ENVIRONMENT} ] => Automation Tests Execution Summary",
-					body: 'Some message !!!',  
-					attachLog: true, 
-					attachmentsPattern: '*.log'
-					)
 				}
 			}
 		}
