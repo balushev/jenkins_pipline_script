@@ -90,7 +90,6 @@ pipeline {
 					else {
 						bat "${params.OVERWRITE_COMMAND}"
 					}
-					assert 1 == 2
 				}
 		    }
 		}
