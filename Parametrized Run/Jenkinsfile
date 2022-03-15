@@ -19,7 +19,7 @@ pipeline {
 		)
 		string(
 			name: 'TAG', 
-			defaultValue: '@sanity', 
+			defaultValue: '@sanity_check', 
 			description: 'Please fill testing tag')
 		choice(
 			name: 'BROWSER', 
