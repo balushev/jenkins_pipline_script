@@ -5,6 +5,10 @@ pipeline {
 		    label 'selenium'
 		}
 	}
+
+	triggers {
+        cron('H/15 * * * *')
+    }
 	
 	stages {
 		stage('Checkout SCM') {
