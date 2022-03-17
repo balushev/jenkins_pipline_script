@@ -18,6 +18,7 @@ pipeline {
 			}
 		    }
 		}
+		
 		stage('Python Requirements'){
 		    steps {
 				echo ' =======================================> Execute Run Python Requirements <=============================='
@@ -36,7 +37,7 @@ pipeline {
 		    }
 		}
 	}
-	
+
 	post('Publish report') {
 		always {
 			script {
